@@ -5,54 +5,63 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Narudbžine</title>
-    <link rel="stylesheet" href="main.css">
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="main.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container px-5">
-            <a class="navbar-brand" href="#!">Vezbe 1</a>
-
-            <div class="collapse navbar-collapse" id="navbarSupporttedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link" href="jela.html">Ponuda</a></li>
-                    <li class="nav-item"><a class="nav-link" href="narudzbine.html">Narudbžine</a></li>
-                </ul>
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="nav-wrapper container px-5">
+                <a class="navbar-brand" href="#!">Vezbe 1</a>
+    
+                <div class="collapse navbar-collapse" id="navbarSupporttedContent">
+                    <ul class="navbar ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link" href="jela.html">Ponuda</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="narudzbine.html">Narudbžine</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-    <header class="bg-dark py-5">
-        <h1 class="text-white text-center my-5">Narudbžine</h1>
+        <h1 class="text-center my-5">Narudbžine</h1>
     </header>
 
     <main class="container">
-        <table>
-            <tr>
-                <th>Zakazano vreme</th>
-                <th>Status</th>
-                <th>Cena</th>
-                <th>Adresa</th>
-                <th>Sadržaj narudžbine</th>
-                <th>Akcija</th>
-            </tr>
-            <tr>
-                <td>5.10.2023 18:30</td>
-                <td>Nova</td>
-                <td>1699</td>
-                <td>Kralja Milana 12/2</td>
-                <td>Pizza Kaprićoza-velika x1<br>Pizza Kaprićoza-mala x1<br>Sendvić Prezident x1</td>
-                <td><a href="narudbina.html?id=1" class="btn btn-primary">Detalji</a></td>
-            </tr>
-            <tr>
-                <td>6.10.2023 12:00</td>
-                <td>Prihvaćena</td>
-                <td>188</td>
-                <td>Knez Mihailova 6/6</td>
-                <td>Sendvič Prezident x2</td>
-                <td><a href="narudbina.html?id=1" class="btn btn-primary">Detalji</a></td>
-            </tr>
+        <table class="basic-table">
+            <thead>
+                <tr>
+                    <th>Zakazano vreme</th>
+                    <th>Status</th>
+                    <th>Cena</th>
+                    <th>Adresa</th>
+                    <th>Sadržaj narudžbine</th>
+                    <th>Akcija</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>5.10.2023 18:30</td>
+                    <td>Nova</td>
+                    <td>1699</td>
+                    <td>Kralja Milana 12/2</td>
+                    <td>Pizza Kaprićoza-velika x1<br>Pizza Kaprićoza-mala x1<br>Sendvić Prezident x1</td>
+                    <td><a href="narudbina.html?id=1" class="btn btn-secondary">Detalji</a></td>
+                </tr>
+                <tr>
+                    <td>6.10.2023 12:00</td>
+                    <td>Prihvaćena</td>
+                    <td>188</td>
+                    <td>Knez Mihailova 6/6</td>
+                    <td>Sendvič Prezident x2</td>
+                    <td><a href="narudbina.html?id=1" class="btn btn-secondary">Detalji</a></td>
+                </tr>
+            </tbody>
           </table>
     </main>
 
