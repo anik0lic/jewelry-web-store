@@ -47,6 +47,7 @@ nav{
     padding-left: 25px;
     padding-right: 25px;
     position: relative;
+    letter-spacing: 1px;
 }
 
 .nav-link,
@@ -66,7 +67,7 @@ nav{
     content: '.';
     color: transparent;
     background: #aaa;
-    height: 1px;
+    height: 2px;
 }
 
 .nav-link:hover:after {
@@ -93,6 +94,7 @@ p{
     margin-right: auto;
     margin-top: 40px;
     width: 90%;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
 
 .basic-table th{
@@ -119,6 +121,7 @@ p{
     color: #534843;
     text-transform: uppercase;
     font-weight: 800;
+    letter-spacing: 0.5px;
 }
 
 .btn-primary{
@@ -133,6 +136,10 @@ p{
     background-color: #9ecdce;
 }
 
+.btn-primary:active{
+    background-color: #84adae !important;
+}
+
 .btn-secondary{
     background-color: #f0e1c0;
 }
@@ -141,6 +148,56 @@ p{
     background-color: #e2d4b7;
 }
 
-.error{border-color:red;}
+.forma{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
 
-.success{border-color:green;}
+.forma .form-label{
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+#opis{
+    height: 90px;
+}
+
+.forma .form-control, .form-select{
+    border: none;
+    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+    height: 45px;
+}
+
+.forma .form-control:focus, .form-select:focus{
+    box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #fff;
+    border: none;
+}
+
+
+.form-btn-unesi{
+    margin-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.form-link-nazad{
+    margin-top: 20px;
+}
+
+.error{
+    /* border-color:red; */
+    box-shadow: red 3px 2px 5px 0px, red 3px 1px 1px 0px;
+}
+
+.success{
+    /* border-color:green; */
+    box-shadow: green 0px 2px 5px 0px, green 0px 1px 1px 0px;
+}
