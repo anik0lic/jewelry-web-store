@@ -126,10 +126,10 @@ p{
 
 .btn-primary{
     background-color: #aedcdd;
-    padding-top: 12px;
+    /* padding-top: 12px;
     padding-bottom: 12px;
     padding-left: 20px;
-    padding-right: 20px;
+    padding-right: 20px; */
 }
 
 .btn-primary:hover{ 
@@ -193,10 +193,17 @@ p{
 
 .error{
     border-color:red;
-    /* box-shadow: red 3px 2px 5px 0px, red 3px 1px 1px 0px; */
 }
 
 .success{
     border-color:green;
-    /* box-shadow: green 0px 2px 5px 0px, green 0px 1px 1px 0px; */
+}
+
+.dl-nar{
+    margin-top: 40px;
+    font-size: 18px;
+}
+
+dd{
+    border-bottom: 2px black;
 }
