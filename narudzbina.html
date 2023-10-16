@@ -16,8 +16,8 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg">
-            <div class="nav-wrapper container px-5">
-                <a class="navbar-brand" href="#!">Vezbe 1</a>
+            <div class="nav-warpper container px-5">
+                <a class="navbar-brand" href="index.html">Vezbe 1</a>
     
                 <div class="collapse navbar-collapse" id="navbarSupporttedContent">
                     <ul class="navbar ms-auto mb-2 mb-lg-0">
@@ -44,6 +44,17 @@
                         <li>Pizza Kaprićoza-velika 1x</li>
                         <li>Pizza Kaprićoza-mala 1x</li>
                     </ul>
+                </dd>
+                <dt class="col-sm-3">Status</dt>
+                <dd class="col-sm-9">
+                    <select class="form-select" name="status" id="status" onchange="document.getElementById('forma').submit()">
+                        <option value="1">Novo</option>
+                        <option value="2">Prihvaćeno</option>
+                        <option value="2">Odbijeno</option>
+                        <option value="2">U pripremi</option>
+                        <option value="2">U dostavi</option>
+                        <option value="2">Završeno</option>
+                    </select> 
                 </dd>
             </dl>              
           </form>

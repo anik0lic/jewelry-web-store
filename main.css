@@ -171,14 +171,13 @@ p{
 }
 
 .forma .form-control, .form-select{
-    border: none;
     box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
     height: 45px;
 }
 
 .forma .form-control:focus, .form-select:focus{
-    box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #fff;
     border: none;
+    box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #fff;
 }
 
 
@@ -193,11 +192,11 @@ p{
 }
 
 .error{
-    /* border-color:red; */
-    box-shadow: red 3px 2px 5px 0px, red 3px 1px 1px 0px;
+    border-color:red;
+    /* box-shadow: red 3px 2px 5px 0px, red 3px 1px 1px 0px; */
 }
 
 .success{
-    /* border-color:green; */
-    box-shadow: green 0px 2px 5px 0px, green 0px 1px 1px 0px;
+    border-color:green;
+    /* box-shadow: green 0px 2px 5px 0px, green 0px 1px 1px 0px; */
 }
