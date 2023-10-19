@@ -44,8 +44,8 @@ nav{
 .nav-link{
     font-size: 18px;
     font-weight: 500;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
     position: relative;
     letter-spacing: 1px;
 }
