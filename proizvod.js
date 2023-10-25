@@ -25,21 +25,21 @@ window.addEventListener("load", function(){
         this.classList.remove('error'); 
     });
     
-    document.getElementById("dodaj-sastojak").addEventListener("click", function(){
-        var id = document.getElementById("spisak-sastojaka").value;
+    document.getElementById("dodaj-materijal").addEventListener("click", function(){
+        var id = document.getElementById("spisak-materijala").value;
         if(!id){
-            alert("Izaberi sastojak");
+            alert("Izaberi materijal");
             return;
         }
-        dodajSastojak(id);
+        dodajMaterijal(id);
     });
 });
 
-function dodajSastojak(id){   
-    document.querySelector(`#spisak-sastojaka > option[value='${id}']`).disabled = true;
-    document.getElementById("spisak-sastojaka").selectedIndex = 0;
+function dodajMaterijal(id){   
+    document.querySelector(`#spisak-materijala > option[value='${id}']`).disabled = true;
+    document.getElementById("spisak-materijala").selectedIndex = 0;
 
-    var naziv = document.querySelector(`#spisak-sastojaka > option[value='${id}']`).innerHTML;
+    var naziv = document.querySelector(`#spisak-materijala > option[value='${id}']`).innerHTML;
     console.log("ovo je" + naziv);
 
     var span = document.createElement("span");
@@ -57,18 +57,18 @@ function dodajSastojak(id){
 
     span.appendChild(button);
 
-    document.getElementById("sastojci").appendChild(span);
-    document.getElementById("sastojci").appendChild(document.createTextNode(" "));
+    document.getElementById("materijali").appendChild(span);
+    document.getElementById("materijali").appendChild(document.createTextNode(" "));
 
     button.addEventListener("click", function(){    
         var id = this.parentNode.dataset.id;
         this.parentNode.parentNode.removeChild(this.parentNode);
-        document.querySelector(`#spisak-sastojaka > option[value='${id}']`).disabled = false;
+        document.querySelector(`#spisak-materijala > option[value='${id}']`).disabled = false;
     })
 }
 
 function sacuvaj(){
-    var spanovi = document.querySelectorAll("#sastojci > span.badge");
+    var spanovi = document.querySelectorAll("#materijali > span.badge");
     var niz = [];
     for(let i=0; i<spanovi.length; i++){
         niz.push(spanovi[i].dataset.id);
@@ -78,7 +78,7 @@ function sacuvaj(){
 
      var jsonNiz = JSON.stringify(niz);
      console.log("ovo je jsonniz " + jsonNiz);
-     var hiddenInput = document.getElementById("sastojci-input");
+     var hiddenInput = document.getElementById("materijali-input");
      hiddenInput.value = jsonNiz;
 }
 
