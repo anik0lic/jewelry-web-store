@@ -1,0 +1,3 @@
+{"naziv":"asfasffas","opis":"asfasfasfasf","kategorija":"1","cena":"214214"}
+{"naziv":"asdahgjf","opis":"gfhgfh","kategorija":"2","cena":"214214"}
+{"naziv":"kyukdsg","opis":"gfhgfh","kategorija":"3","cena":"567657"}
