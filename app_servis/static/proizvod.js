@@ -6,16 +6,13 @@ window.addEventListener("load", function(){
             validno = false;
             document.getElementById("naziv").classList.add("error");
             document.getElementById("naziv").classList.remove("success");
+            event.preventDefault();
         }
         else{
             document.getElementById("naziv").classList.add("success");
             document.getElementById("naziv").classList.remove("error");
-        }
-
-        if(!validno) 
-            event.preventDefault();
-        else 
             sacuvaj();
+        }
     
         return validno;
     });
@@ -40,7 +37,6 @@ function dodajMaterijal(id){
     document.getElementById("spisak-materijala").selectedIndex = 0;
 
     var naziv = document.querySelector(`#spisak-materijala > option[value='${id}']`).innerHTML;
-    console.log("ovo je" + naziv);
 
     var span = document.createElement("span");
     span.classList.add("badge");
@@ -70,14 +66,12 @@ function dodajMaterijal(id){
 function sacuvaj(){
     var spanovi = document.querySelectorAll("#materijali > span.badge");
     var niz = [];
+
     for(let i=0; i<spanovi.length; i++){
         niz.push(spanovi[i].dataset.id);
      }     
 
-     console.log(niz);
-
      var jsonNiz = JSON.stringify(niz);
-     console.log("ovo je jsonniz " + jsonNiz);
      var hiddenInput = document.getElementById("materijali-input");
      hiddenInput.value = jsonNiz;
 }

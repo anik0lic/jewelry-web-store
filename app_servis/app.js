@@ -29,7 +29,7 @@ app.post('/novi-proizvod', (req, res) => {
 	    return;
     } else {
         req.body.opis.replace(/\r?\n|\r/g, '<br>');
-        fs.appendFile("proizvodi.txt", 
+        fs.appendFile('proizvodi.txt', 
                 JSON.stringify(req.body) + "\n", 
                  function(err, succ){
                      res.send("Poruka je poslata, očekujte odgovor uskoro");
@@ -45,13 +45,13 @@ app.get("/proizvodi", (req, res) => {
     fs.readFile('proizvodi.txt', 'utf8', (err, data) => {
         if (err) {
           console.error('Error reading file:', err);
-          res.status(500).send({ error: "Greška" });
+          res.status(500).send({error: "Greška"});
           return;
         }
         else{
             const redovi = data.split('\n');
-            for(let i=0; i<redovi.length-1; i++){
-                let obj = JSON.parse( redovi[i] );
+            for(let i = 0; i < redovi.length - 1; i++){
+                let obj = JSON.parse(redovi[i]);
                 proizvodi.push(obj);
             }
             res.json(proizvodi);
