@@ -1,3 +1,4 @@
-{"naziv":"asfasffas","opis":"asfasfasfasf","kategorija":"1","cena":"214214"}
-{"naziv":"asdahgjf","opis":"gfhgfh","kategorija":"2","cena":"214214"}
-{"naziv":"kyukdsg","opis":"gfhgfh","kategorija":"3","cena":"567657"}
+{"naziv":"prsten1","opis":"lep prsten","kategorija":"1","cena":"10000"}
+{"naziv":"narukvica1","opis":"nanananan","kategorija":"3","cena":"1515125"}
+{"naziv":"ogrlicaaa","opis":"qwrtyqwert","kategorija":"2","cena":"10000"}
+{"naziv":"dagdgdsg","opis":"gsfjgsjsj","kategorija":"1","cena":"2345125"}

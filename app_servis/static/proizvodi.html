@@ -86,9 +86,16 @@
                 for(let i=0; i<data.length; i++){
                     let tr = document.createElement("tr");
                     let td1 = document.createElement("td");
-                    td1.innerHTML = data[i].naziv;
+                    let td2 = document.createElement("td");
+                    let td3 = document.createElement("td");
+
+                    td1.innerHTML = data[i].kategorija;
                     tr.appendChild(td1);
-                    //… ostatak
+                    td2.innerHTML = data[i].naziv;
+                    tr.appendChild(td2);
+                    td3.innerHTML = data[i].cena;
+                    tr.appendChild(td3);
+
                     document.getElementById("spisak").appendChild(tr);
                     //data[i].kategorija
                     //data[i].cena
@@ -96,7 +103,7 @@
                     //ovde ide i pridruzivanje click eventa na <button>  Promena cene
                     let btn = document.createElement("button");
                     btn.addEventListener("click", function(){
-                    //..telo funkcije…
+                        console.log("klik");
                     });
                 }
             })

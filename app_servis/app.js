@@ -30,9 +30,9 @@ app.post('/novi-proizvod', (req, res) => {
     } else {
         req.body.opis.replace(/\r?\n|\r/g, '<br>');
         fs.appendFile("proizvodi.txt", 
-                 JSON.stringify(req.body) + "\n", 
+                JSON.stringify(req.body) + "\n", 
                  function(err, succ){
-                     res.send("Poruka je poslana, očekujte odgovor uskoro");
+                     res.send("Poruka je poslata, očekujte odgovor uskoro");
                  }
         );
 
@@ -50,7 +50,7 @@ app.get("/proizvodi", (req, res) => {
         }
         else{
             const redovi = data.split('\n');
-            for(let i=0; i<redovi.length; i++){
+            for(let i=0; i<redovi.length-1; i++){
                 let obj = JSON.parse( redovi[i] );
                 proizvodi.push(obj);
             }
