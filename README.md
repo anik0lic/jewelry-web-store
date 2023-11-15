@@ -1,1 +1,1 @@
-# vezbe1-sk
+# skript jezici projekat
