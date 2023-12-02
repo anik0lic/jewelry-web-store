@@ -1,5 +1,5 @@
 const express = require("express");
-const { sequelize, Proizvod} = require("../models");
+const { sequelize, Proizvod, Kategorija} = require("../models");
 const route = express.Router();
 
 route.use(express.json());
@@ -7,7 +7,7 @@ route.use(express.urlencoded({extended:true}));
 
 route.get("/", async (req, res) => {
     try{
-          const proizvodi = await Proizvod.findAll();
+          const proizvodi = await Proizvod.findAll({ include: { model: Kategorija, as: "kategorija" } });
           return res.json(proizvodi);
     }catch(err){
          console.log(err);

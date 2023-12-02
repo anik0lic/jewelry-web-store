@@ -55,10 +55,10 @@
                 <div class="col-6">
                     <label for="kategorija" class="form-label">Kategorija:</label>
                     <select class="form-select" name="kategorija" id="kategorija">
-                        <option value="Prstenje">Prstenje</option>
-                        <option value="Ogrlice">Ogrlice</option>
-                        <option value="Narukvice">Narukvice</option>
-                    </select>                
+                        <option value="1">Prstenje</option>
+                        <option value="2">Ogrlice</option>
+                        <option value="3">Narukvice</option>
+                    </select>
                 </div>
                 <div class="col-6">
                     <label for="opis" class="form-label">Cena:</label>
@@ -70,10 +70,10 @@
                 <div class="input-group mb-3">
                     <select class="form-select" id="spisak-materijala">
                         <option></option>
-                        <option value="Zlato">Zlato</option>
-                        <option value="Srebro">Srebro</option>
-                        <option value="Belo zlato">Belo zlato</option>
-                        <option value="Roze zlato">Roze zlato</option>
+                        <option value="1">Zlato</option>
+                        <option value="2">Srebro</option>
+                        <option value="3">Belo zlato</option>
+                        <option value="4">Roze zlato</option>
                     </select>    
                     <button class="btn btn-success" type="button" id="dodaj-materijal">+</button>
                 </div>
@@ -83,7 +83,7 @@
             <div class="mt-3">
                 <button class="btn btn-primary form-btn-unesi">Sačuvaj</button>
                 <a href="proizvodi.html" class="btn btn-link form-link-nazad">Nazad</a>
-                <a href="#" class="btn btn-danger form-btn-unesi">Obriši</a>
+                <a href="#" class="btn btn-danger form-btn-unesi" id="obrisi">Obriši</a>
             </div>
 
             <input type="hidden" name="materijali" id="materijali-input">

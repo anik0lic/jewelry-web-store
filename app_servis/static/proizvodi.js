@@ -1,5 +1,5 @@
 window.addEventListener("load", function(){
-    fetch('/proizvodi')
+    fetch("http://localhost:9000/proizvod/")
     .then(response => {
         let promise = response.json();
 
@@ -12,8 +12,10 @@ window.addEventListener("load", function(){
                 let naziv = document.createElement("td");
                 let cena = document.createElement("td");
                 let akcija = document.createElement("td");
+
+                tr.dataset.id = data[i].id;
     
-                kategorija.innerHTML = data[i].kategorija;
+                kategorija.innerHTML = data[i].kategorija.naziv;
                 tr.appendChild(kategorija);
 
                 naziv.innerHTML = data[i].naziv;
@@ -27,7 +29,23 @@ window.addEventListener("load", function(){
                 btnPromenaCene.className = "btn btn-secondary";
                 btnPromenaCene.innerHTML = "Promena cene";
                 btnPromenaCene.addEventListener("click", function(){
-                    console.log("klik");
+                    var c = prompt("Unesi novu cenu:");
+                    var id =  this.closest("tr").dataset.id;
+                    fetch(`http://localhost:9000/promeni-cenu/${id}`, {
+                        method: 'PUT',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ cena: c })
+                    })
+                    .then( response=>response.json() )
+                    .then( data=>{
+                        document.querySelectorAll(` #spisak > tr[data-id='${data.id}'] > td:nth-child(2) `).innerHTML = data.cena;
+                        location.reload();
+                    })
+                    .catch( err=>{
+                        alert("Desila se greska");
+                        console.log(err);
+                    });
+
                 });
 
                 let btnIzmeni = document.createElement("a");

@@ -1,4 +1,23 @@
+var id = null;
 window.addEventListener("load", function(){
+    var url = new URL( window.location.href );
+    id = url.searchParams.get("id");
+    console.log(id);
+
+    fetch("http://localhost:9000/proizvod/" + id).then( resp=>resp.json() )
+    .then( data=>{
+        console.log(data);
+        document.getElementById("naziv").value = data.naziv; 
+        document.getElementById("opis").value = data.opis; 
+        document.getElementById("cena").value = data.cena;
+        document.getElementById("kategorija").value = data.kategorija_id;
+
+        // for(let i = 0; i < data.materijali.length; i++){
+        //     dodajMaterijal(data.materijali[i]); //zavisno sta je u nizu, mozda vam treba .id
+        // }  
+    })
+    .catch(err=>console.log(err));  
+
 	document.getElementById("forma").addEventListener("submit", function(){
         var validno = true;
 
@@ -30,6 +49,22 @@ window.addEventListener("load", function(){
         }
         dodajMaterijal(id);
     });
+
+    document.getElementById("obrisi").addEventListener("click", function(){
+        if( confirm("Potvrdi brisanje") ){
+            fetch("http://localhost:9000/proizvod/"+id, { method:"DELETE" })
+            .then( resp=>resp.json()).then(data=>{
+                //response sadrzi samo id obrisanog
+                alert("Obrisan je zapis "+data);
+                window.location.href("/proizvod"); //predji na spisak
+            })
+            .catch( err=>console.log(err));
+        } else {
+            return;
+        }
+        
+    });
+
 });
 
 function dodajMaterijal(id){   
