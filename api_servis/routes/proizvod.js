@@ -1,5 +1,5 @@
 const express = require("express");
-const { sequelize, Proizvod, Kategorija} = require("../models");
+const { sequelize, Proizvod, Kategorija, ProizvodMaterijal, StavkaNarudzbine} = require("../models");
 const route = express.Router();
 
 route.use(express.json());
@@ -7,7 +7,11 @@ route.use(express.urlencoded({extended:true}));
 
 route.get("/", async (req, res) => {
     try{
-          const proizvodi = await Proizvod.findAll({ include: { model: Kategorija, as: "kategorija" } });
+          const proizvodi = await Proizvod.findAll({include:[
+                 {model: Kategorija, as: "kategorija"},
+                 {model: ProizvodMaterijal, as: "materijal"},
+                 {model: StavkaNarudzbine, as: "stavka"}
+               ]});
           return res.json(proizvodi);
     }catch(err){
          console.log(err);
@@ -17,7 +21,11 @@ route.get("/", async (req, res) => {
 
  route.get("/:id", async (req, res) => {
     try{
-          const proizvod = await Proizvod.findByPk(req.params.id);
+          const proizvod = await Proizvod.findByPk(req.params.id,{include:[
+               {model: Kategorija, as: "kategorija"},
+               {model: ProizvodMaterijal, as: "materijal"},
+               {model: StavkaNarudzbine, as: "stavka"}
+             ]});
           return res.json(proizvod);
     }catch(err){
          console.log(err);

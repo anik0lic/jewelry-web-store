@@ -1,5 +1,5 @@
 const express = require("express");
-const { sequelize, Materijal} = require("../models");
+const { sequelize, Materijal, ProizvodMaterijal} = require("../models");
 const route = express.Router();
 
 route.use(express.json());
@@ -7,7 +7,9 @@ route.use(express.urlencoded({extended:true}));
 
 route.get("/", async (req, res) => {
     try{
-          const materijal = await Materijal.findAll();
+          const materijal = await Materijal.findAll({include:[
+               {model: ProizvodMaterijal, as: "proizvod"}
+             ]});
           return res.json(materijal);
     }catch(err){
          console.log(err);
@@ -17,7 +19,9 @@ route.get("/", async (req, res) => {
 
  route.get("/:id", async (req, res) => {
     try{
-          const materijal = await Materijal.findByPk(req.params.id);
+          const materijal = await Materijal.findByPk(req.params.id, {include:[
+               {model: ProizvodMaterijal, as: "proizvod"}
+             ]});
           return res.json(materijal);
     }catch(err){
          console.log(err);

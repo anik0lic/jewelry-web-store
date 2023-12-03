@@ -3,7 +3,6 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-
     await queryInterface.bulkInsert('proizvodi',
     [
         {id:"1",naziv:"Srebrni Prsten", opis:"lep prsten", cena: 100000, kategorija_id:1},

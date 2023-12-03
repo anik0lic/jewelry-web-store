@@ -4,9 +4,8 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Narudzbina extends Model {
-
     static associate({StavkaNarudzbine}) {
-      this.hasMany(StavkaNarudzbine, {foreignKey: "narudzbina_id", as: "stavke"});
+      this.hasMany(StavkaNarudzbine, {foreignKey: "narudzbina_id", as: "stavka"});
     }
   }
   Narudzbina.init({
@@ -29,7 +28,11 @@ module.exports = (sequelize, DataTypes) => {
     ime_prezime: {
       type: DataTypes.TEXT,
       allowNull: false
-    }
+    },
+    cena: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
   }, {
     sequelize,
     modelName: 'Narudzbina',

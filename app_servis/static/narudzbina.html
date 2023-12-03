@@ -44,40 +44,46 @@
     <main class="container">
         <form method="post" i action="http://postman-echo.com/post" id="forma">
             <dl class="row dl-nar">
-                <dt class="col-sm-2">Zakazano vreme:</dt>
-                <dd class="col-sm-10">5.10.2023 16:15</dd>
-
-                <dt class="col-sm-2">Cena:</dt>
-                <dd class="col-sm-10">1699</dd>
+                <dt class="col-sm-2">Vreme Naručivanja:</dt>
+                <dd class="col-sm-10" id="vreme"></dd>
 
                 <dt class="col-sm-2">Adresa:</dt>
-                <dd class="col-sm-10">Kralja Milana 12/2</dd>
+                <dd class="col-sm-10" id="adresa"></dd>
+
+                <dt class="col-sm-2">Telefon:</dt>
+                <dd class="col-sm-10" id="telefon"></dd>
+
+                <dt class="col-sm-2">Ime i Prezime:</dt>
+                <dd class="col-sm-10" id="ime_prezime"></dd>
+
+                <dt class="col-sm-2">Cena:</dt>
+                <dd class="col-sm-10" id="cena"></dd>
               
                 <dt class="col-sm-2">Sadržaj narudžbine:</dt>
                 <dd class="col-sm-10">
                     <ul id="sadrzaj">
-                        <li>Verenički prsten 1x</li>
+                        <!-- <li>Verenički prsten 1x</li>
                         <li>Zlatna ogrlica 1x</li>
-                        <li>Narukvica sa brilijantima x1</li>
+                        <li>Narukvica sa brilijantima x1</li> -->
                     </ul>
                 </dd>
                 <dt class="col-sm-2">Status</dt>
                 <dd class="col-sm-4">
                     <select class="form-select" name="status" id="status" onchange="document.getElementById('forma').submit()">
-                        <option value="1">Novo</option>
-                        <option value="2">Prihvaćeno</option>
-                        <option value="2">Odbijeno</option>
-                        <option value="2">U pripremi</option>
-                        <option value="2">U dostavi</option>
-                        <option value="2">Završeno</option>
+                        <option value="Novo">Novo</option>
+                        <option value="Prihvaceno">Prihvaceno</option>
+                        <option value="Odbijeno">Odbijeno</option>
+                        <option value="U pripremi">U pripremi</option>
+                        <option value="U dostavi">U dostavi</option>
+                        <option value="Zavrseno">Zavrseno</option>
                     </select> 
                 </dd>
             </dl>              
-          </form>
+        </form>
     </main>
 
 
-
+    <script src="narudzbina.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

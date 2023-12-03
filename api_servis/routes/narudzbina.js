@@ -1,5 +1,5 @@
 const express = require("express");
-const { sequelize, Narudzbina} = require("../models");
+const { sequelize, Narudzbina, StavkaNarudzbine} = require("../models");
 const route = express.Router();
 
 route.use(express.json());
@@ -7,7 +7,9 @@ route.use(express.urlencoded({extended:true}));
 
 route.get("/", async (req, res) => {
     try{
-          const narudzbina = await Narudzbina.findAll();
+          const narudzbina = await Narudzbina.findAll({include:[
+               {model: StavkaNarudzbine, as: "stavka"}
+             ]});
           return res.json(narudzbina);
     }catch(err){
          console.log(err);
@@ -17,7 +19,9 @@ route.get("/", async (req, res) => {
 
  route.get("/:id", async (req, res) => {
     try{
-          const narudzbina = await Narudzbina.findByPk(req.params.id);
+          const narudzbina = await Narudzbina.findByPk(req.params.id, {include:[
+               {model: StavkaNarudzbine, as: "stavka"}
+             ]});
           return res.json(narudzbina);
     }catch(err){
          console.log(err);
@@ -36,6 +40,7 @@ route.get("/", async (req, res) => {
                novi.adresa = req.body.mojaAdresa;
                novi.telefon = req.body.mojTelefon;
                novi.ime_prezime = req.body.imeIPrezime;
+               novi.cena = req.body.mojaCena;
                const insertovani = await Narudzbina.create(novi);
                return res.json(insertovani);
           }
@@ -56,6 +61,7 @@ route.get("/", async (req, res) => {
           narudzbina.adresa = req.body.adresa;
           narudzbina.telefon = req.body.telefon;
           narudzbina.ime_prezime = req.body.ime_prezime;
+          narudzbina.cena = req.body.cena;
           narudzbina.save();
           return res.json(narudzbina);
     }catch(err){

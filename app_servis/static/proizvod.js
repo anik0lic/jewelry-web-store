@@ -1,10 +1,40 @@
-var id = null;
+var idProizvoda = null;
 window.addEventListener("load", function(){
     var url = new URL( window.location.href );
-    id = url.searchParams.get("id");
-    console.log(id);
+    idProizvoda = url.searchParams.get("id");
+    console.log(idProizvoda);
 
-    fetch("http://localhost:9000/proizvod/" + id).then( resp=>resp.json() )
+    fetch("http://localhost:9000/kategorija/")
+    .then(response => {
+        let promise = response.json();
+
+        promise.then(data => {
+            for(let i = 0; i < data.length; i++){
+                let option = document.createElement("option");
+                option.value = data[i].id;
+                option.innerHTML = data[i].naziv;
+                document.getElementById("kategorija").appendChild(option);
+            }
+        })
+    })
+    .catch(err=>console.log(err));
+
+    fetch("http://localhost:9000/materijal/")
+    .then(response => {
+        let promise = response.json();
+
+        promise.then(data => {
+            for(let i = 0; i < data.length; i++){
+                let option = document.createElement("option");
+                option.value = data[i].id;
+                option.innerHTML = data[i].naziv;
+                document.getElementById("spisak-materijala").appendChild(option);
+            }
+        })
+    })
+    .catch(err=>console.log(err));
+
+    fetch("http://localhost:9000/proizvod/" + idProizvoda).then( resp=>resp.json() )
     .then( data=>{
         console.log(data);
         document.getElementById("naziv").value = data.naziv; 
@@ -12,28 +42,43 @@ window.addEventListener("load", function(){
         document.getElementById("cena").value = data.cena;
         document.getElementById("kategorija").value = data.kategorija_id;
 
-        // for(let i = 0; i < data.materijali.length; i++){
-        //     dodajMaterijal(data.materijali[i]); //zavisno sta je u nizu, mozda vam treba .id
-        // }  
+        console.log(data.materijal);
+
+        for(let i = 0; i < data.materijal.length; i++){
+            dodajMaterijal(data.materijal[i].materijal_id, data.materijal[i].id);
+        }  
     })
-    .catch(err=>console.log(err));  
+    .catch(err=>console.log(err));
 
 	document.getElementById("forma").addEventListener("submit", function(){
-        var validno = true;
-
-        if(document.getElementById("naziv").value.length < 3){
-            validno = false;
-            document.getElementById("naziv").classList.add("error");
-            document.getElementById("naziv").classList.remove("success");
-            event.preventDefault();
-        }
-        else{
-            document.getElementById("naziv").classList.add("success");
-            document.getElementById("naziv").classList.remove("error");
+        event.preventDefault();	
+        var validno = validacija();
+        if(!validno){ 
             sacuvaj();
-        }
+            return;
+        }	
+
+        var noviProizvod = {};
+        noviProizvod.naziv = document.getElementById("naziv").value;
+        noviProizvod.opis = document.getElementById("opis").value;
+        noviProizvod.cena = document.getElementById("cena").value;
+        noviProizvod.kategorija_id = document.getElementById("kategorija").value;
+
+        fetch("http://localhost:9000/proizvod/" + idProizvoda, {
+            method:"PUT",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(noviProizvod)
+        })
+        .then( response=>response.json())
+        .then( data=>{
+            location.href = "proizvodi.html";
+        })
+        .catch( err=>{
+            alert("Desila se greska");
+            console.log(err);
+        });	
     
-        return validno;
+        return;
     });
     
     document.getElementById("naziv").addEventListener("keypress", function(){
@@ -47,27 +92,40 @@ window.addEventListener("load", function(){
             alert("Izaberi materijal");
             return;
         }
+
+        var noviMaterijal = {};
+        noviMaterijal.proizvod_id = idProizvoda;
+        console.log(idProizvoda + "proizvod");
+        console.log(id + "materijal");
+        noviMaterijal.materijal_id = id;
+
+        fetch("http://localhost:9000/proizvod-materijal/", {
+            method:"POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(noviMaterijal)
+        })
+        .then(succ=>succ.json())
+        .catch(err => console.log(err));
+
         dodajMaterijal(id);
     });
 
     document.getElementById("obrisi").addEventListener("click", function(){
         if( confirm("Potvrdi brisanje") ){
-            fetch("http://localhost:9000/proizvod/"+id, { method:"DELETE" })
+            fetch("http://localhost:9000/proizvod/" + idProizvoda, { method:"DELETE" })
             .then( resp=>resp.json()).then(data=>{
-                //response sadrzi samo id obrisanog
                 alert("Obrisan je zapis "+data);
-                window.location.href("/proizvod"); //predji na spisak
+                location.href = "proizvodi.html";
             })
             .catch( err=>console.log(err));
         } else {
             return;
-        }
-        
+        }  
     });
 
 });
 
-function dodajMaterijal(id){   
+function dodajMaterijal(id, idProizvodMaterijal){   
     document.querySelector(`#spisak-materijala > option[value='${id}']`).disabled = true;
     document.getElementById("spisak-materijala").selectedIndex = 0;
 
@@ -94,6 +152,13 @@ function dodajMaterijal(id){
     button.addEventListener("click", function(){    
         var id = this.parentNode.dataset.id;
         this.parentNode.parentNode.removeChild(this.parentNode);
+
+        fetch("http://localhost:9000/proizvod-materijal/" + idProizvodMaterijal, {
+            method:"DELETE",
+        })
+        .then(succ=>succ.json())
+        .catch(err => console.log(err));
+
         document.querySelector(`#spisak-materijala > option[value='${id}']`).disabled = false;
     })
 }
@@ -109,6 +174,21 @@ function sacuvaj(){
      var jsonNiz = JSON.stringify(niz);
      var hiddenInput = document.getElementById("materijali-input");
      hiddenInput.value = jsonNiz;
+}
+
+function validacija(){
+    var validno = true;
+    if(document.getElementById("naziv").value.length < 3){
+        validno = false;
+        document.getElementById("naziv").classList.add("error");
+        document.getElementById("naziv").classList.remove("success");
+    }
+    else{
+        document.getElementById("naziv").classList.add("success");
+        document.getElementById("naziv").classList.remove("error");
+    }
+
+    return validno;
 }
 
 

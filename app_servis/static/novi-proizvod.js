@@ -1,10 +1,25 @@
 window.addEventListener("load", function(){
-    document.getElementById("forma").addEventListener("submit", function(event){
-        event.preventDefault();	//sprecimo default ponasanje
-        var validno = validacija();	//uradimo validaciju
-        if(!validno){ return; }		//ako nije validno - kraj
+    fetch("http://localhost:9000/kategorija/")
+    .then(response => {
+        let promise = response.json();
 
-        var noviProizvod = {};		//napravimo novi objekat jela
+        promise.then(data => {
+            for(let i = 0; i < data.length; i++){
+                let option = document.createElement("option");
+                option.value = data[i].id;
+                option.innerHTML = data[i].naziv;
+                document.getElementById("kategorija").appendChild(option);
+            }
+        })
+    })
+    .catch(err=>console.log(err));
+
+    document.getElementById("forma").addEventListener("submit", function(event){
+        event.preventDefault();
+        var validno = validacija();
+        if(!validno){ return; }
+
+        var noviProizvod = {};
         noviProizvod.naziv = document.getElementById("naziv").value;
         noviProizvod.opis = document.getElementById("opis").value;
         noviProizvod.cena = document.getElementById("cena").value;
@@ -17,11 +32,9 @@ window.addEventListener("load", function(){
             body: JSON.stringify(noviProizvod)
         })
         .then(succ=>succ.json())
-        // .then(data=>{
-        //     //dobili smo objekat novounesenog jela, koje ima svoj id, super
-        //     //mozemo nazad na spisak, a mozemo i na izmenu tog jela
-        //     // window.location.href=`/proizvod/izmeni/${data.id}`;
-        // })
+        .then(data=>{
+            location.href = "proizvodi.html";
+        })
         .catch(err => console.log(err));	
     });
 });

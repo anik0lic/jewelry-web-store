@@ -28,11 +28,14 @@ app.use("/materijal", materijalRoutes);
 const narudzbinaRoutes = require("./routes/narudzbina.js");
 app.use("/narudzbina", narudzbinaRoutes);
 
+const stavkaNarudzbinaRoutes = require("./routes/stavka-narudzbina.js");
+app.use("/stavka-narudzbina", stavkaNarudzbinaRoutes);
+
+const proizvodMaterijalRoutes = require("./routes/proizvod-materijal.js");
+app.use("/proizvod-materijal", proizvodMaterijalRoutes);
+
 app.put("/promeni-cenu/:id", async (req,res)=>{
-	console.log("assdgagdsahad");
 	try{
-		console.log("promena cene app put");
-		console.log(req.body);
    	   	const proizvod = await Proizvod.findByPk(req.params.id);
 		if (!proizvod) {
 			console.log("null");
