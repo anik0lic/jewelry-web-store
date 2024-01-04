@@ -32,8 +32,8 @@ export default new Vuex.Store({
     },
     async getProizvod ({ commit, state }, proizvodID) {
       return new Promise((resolve, reject) => {
-        if (state.proizvodi[proizvodID]) {
-          resolve(state.proizvodi[proizvodID])
+        if (state.proizvodi[proizvodID - 1]) {
+          resolve(state.proizvodi[proizvodID - 1])
         } else {
           fetch(`http://localhost:9000/proizvod/${proizvodID}`)
             .then(res => res.json())
