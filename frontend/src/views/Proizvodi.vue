@@ -23,7 +23,7 @@
             <button @click="next()">Sledece</button>
           </div>
           <div class="proizvodi">
-            <ProizvodOpis v-for="proizvod in currentPageItems" :key="proizvod.id" :proizvod="proizvod" />
+            <ProizvodKartica v-for="proizvod in currentPageItems" :key="proizvod.id" :proizvod="proizvod" />
           </div>
         </b-col>
       </b-row>
@@ -32,13 +32,13 @@
 </template>
 
 <script>
-import ProizvodOpis from '@/components/ProizvodOpis.vue'
+import ProizvodKartica from '@/components/ProizvodKartica.vue'
 import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'Proizvodi',
   components: {
-    ProizvodOpis
+    ProizvodKartica
   },
   data () {
     return {

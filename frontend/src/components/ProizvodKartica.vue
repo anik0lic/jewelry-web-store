@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'ProizvodJedan',
+  name: 'ProizvodKartica',
 
   props: {
     proizvod: Object
@@ -19,7 +19,7 @@ export default {
 
   methods: {
     kliknutProizvod () {
-      this.$router.push({ name: 'proizvod', params: { id: this.proizvod.id } })
+      this.$router.push({ name: 'Proizvod', params: { id: this.proizvod.id } })
     }
   }
 }

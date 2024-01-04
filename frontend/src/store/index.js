@@ -6,9 +6,25 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     proizvodi: [],
+    korpa: [],
     narudzbine: []
   },
   getters: {
+    kolicinaProizvoda: state => proizvod => {
+      const item = state.korpa.find(i => i.id === proizvod.id)
+
+      if (item) return item.quantity
+      else return null
+    },
+    proizvodiIzKorpe: state => {
+      return state.korpa
+    },
+    ukupnaCena: state => {
+      return state.korpa.reduce((a, b) => a + (b.cena * b.quantity), 0)
+    },
+    ukupnoProizvoda: state => {
+      return state.korpa.reduce((a, b) => a + b.quantity, 0)
+    }
   },
   mutations: {
     setProizvodi (state, proizvodi) {
@@ -22,6 +38,37 @@ export default new Vuex.Store({
     },
     addNarudzbina (state, narudzbina) {
       state.narudzbine.push(narudzbina)
+    },
+    addUKorpu (state, { proizvod, kolicina }) {
+      const item = state.korpa.find(i => i.id === proizvod.id)
+
+      if (item) {
+        item.quantity += kolicina
+      } else {
+        state.korpa.push({ ...proizvod, quantity: kolicina })
+      }
+
+      localStorage.setItem('korpa', JSON.stringify(state.korpa))
+    },
+    removeIzKorpe (state, proizvod) {
+      const item = state.korpa.find(i => i.id === proizvod.id)
+
+      if (item) {
+        if (item.quantity > 1) {
+          item.quantity--
+        } else {
+          state.korpa = state.korpa.filter(i => i.id !== proizvod.id)
+        }
+      }
+
+      localStorage.setItem('korpa', JSON.stringify(state.korpa))
+    },
+    updateKorpaFromLocalStorage (state) {
+      const korpa = localStorage.getItem('korpa')
+
+      if (korpa) {
+        state.korpa = JSON.parse(korpa)
+      }
     }
   },
   actions: {
