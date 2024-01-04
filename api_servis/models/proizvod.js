@@ -27,6 +27,10 @@ module.exports = (sequelize, DataTypes) => {
     kategorija_id: {
         type: DataTypes.INTEGER,
         allowNull: false
+    }, 
+    slika: {
+        type: DataTypes.TEXT,
+        allowNull: false
     }
   }, {
     sequelize,

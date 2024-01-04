@@ -6,7 +6,8 @@ module.exports = {
     await queryInterface.bulkInsert('materijali',
     [
         {id:"1",naziv:"Srebro"},
-        {id:"2",naziv:"Zlato"}
+        {id:"2",naziv:"Zlato"},
+        {id:"3",naziv:"Roze Zlato"}
     ]); 
   },
 

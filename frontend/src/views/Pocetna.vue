@@ -1,7 +1,6 @@
 <template>
   <div class="pocetna">
-    <!-- <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+    <h1>ZLATARA</h1>
   </div>
 </template>
 
@@ -15,3 +14,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+h1{
+  text-align: center;
+  margin-top: 40px;
+  font-weight: 900;
+}
+
+</style>

@@ -6,7 +6,9 @@ module.exports = {
     await queryInterface.bulkInsert('kategorije',
     [
         {id:"1",naziv:"Prstenje"},
-        {id:"2",naziv:"Ogrlice"}
+        {id:"2",naziv:"Ogrlice"},
+        {id:"3",naziv:"Narukvice"},
+        {id:"4",naziv:"Minđuše"}
     ]); 
   },
 

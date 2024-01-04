@@ -35,7 +35,7 @@ export default new Vuex.Store({
         if (state.proizvodi[proizvodID]) {
           resolve(state.proizvodi[proizvodID])
         } else {
-          fetch('http://localhost:9000/proizvod/' + proizvodID)
+          fetch(`http://localhost:9000/proizvod/${proizvodID}`)
             .then(res => res.json())
             .then(data => {
               commit('addProizvod', data)
