@@ -8,6 +8,7 @@
       <h2>Vaša Korpa</h2>
       <hr>
       <ProizvodIzKorpe v-for="proizvod in korpa" :key="proizvod.id" :proizvod="proizvod"/>
+      <p v-if="!korpa.length">Nemate ništa u korpi 😢</p>
       <hr>
       <div class="ukupno">
         <h3>Ukupna Cena: {{ ukupnaCena.toLocaleString() }} RSD</h3>

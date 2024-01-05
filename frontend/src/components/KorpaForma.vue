@@ -36,6 +36,7 @@ export default {
         adresa: null,
         telefon: null,
         cena: this.$store.getters.ukupnaCena,
+        vreme_narucivanja: new Date(),
         status: 'Novo'
       }
     }
@@ -88,7 +89,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .forma{
     font-size: 18px;
     font-family: Kanit, sans-serif;
@@ -121,18 +122,19 @@ export default {
     text-align: right;
     margin-right: 15px;
     margin-top: 25px;
+    font-family: 'Nunito', sans-serif;
 }
 
 .dugme .posalji{
-    background-color: #213E51;
-}
-
-.dugme .posalji:hover{
     background-color: #3b5f77;
 }
 
+.dugme .posalji:hover{
+    background-color: #213E51;
+}
+
 .dugme .posalji:active{
-    background-color: #36576c !important;
+    background-color: #213E51 !important;
 }
 
 </style>

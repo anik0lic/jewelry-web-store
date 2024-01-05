@@ -5,28 +5,38 @@
           <b-col cols="6" class="slika">
             <img :src="proizvod.slika" alt="">
           </b-col>
-          <b-col cols="6">
+          <b-col cols="6" class="opis">
             <h3>{{ proizvod.naziv }}</h3>
+            <hr>
             <h5>Kategorija: {{  proizvod.kategorija.naziv }}</h5>
-            <h4>{{ proizvod.cena.toLocaleString() }} RSD</h4>
             <p>{{ proizvod.opis }}</p>
-            <div>
-              <div class="quantity">
-                <p>Kolicina</p>
-                <b-input-group>
-                  <b-btn variant="info" @click="decrement()" class="minus">-</b-btn>
-                  <b-form-input type="number" min="0.00" :value="quantity" class="broj" disabled></b-form-input>
-                  <b-btn variant="info" @click="increment()" class="plus">+</b-btn>
-                </b-input-group>
+            <div class="wrapper">
+              <div class="quantityWrapper">
+                <div class="quantity">
+                  <h5>Kolicina</h5>
+                  <b-input-group>
+                    <b-btn variant="info" @click="decrement()" class="minus">-</b-btn>
+                    <b-form-input type="number" min="0.00" :value="quantity" class="broj" disabled></b-form-input>
+                    <b-btn variant="info" @click="increment()" class="plus">+</b-btn>
+                  </b-input-group>
+                </div>
+                <div class="uKorpiWrapper">
+                  <div class="dodajDugme">
+                    <button @click="dodajUKorpu()" class="korpaDugme">Dodaj u Korpu</button>
+                  </div>
+                  <div class="uKorpi" v-if="ukupnaKolicina">
+                    <div class="korpaStavke">
+                      <div class="h6Div">
+                        <h6>U korpi: {{ ukupnaKolicina }}</h6>
+                      </div>
+                      <button @click="izbaciIzKorpe()" class="izbaciDugme">X</button>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div>
-              <button @click="dodajUKorpu()">Dodaj U Korpu</button>
-            </div>
-            <div class="korpa" v-if="ukupnaKolicina">
-                <h3>U korpi</h3>
-                <h4>{{ ukupnaKolicina }}</h4>
-                <button @click="izbaciIzKorpe()">Izbaci Iz Korpe</button>
+              <div class="cena">
+                <h4>{{ proizvod.cena.toLocaleString() }} RSD</h4>
+              </div>
             </div>
           </b-col>
         </b-row>
@@ -34,7 +44,7 @@
     </div>
 </template>
 
-<script>
+<script scoped>
 import { mapActions, mapMutations } from 'vuex'
 
 export default {
@@ -99,6 +109,8 @@ export default {
   .proizvod{
     margin: 40px;
     padding: 30px;
+    padding-top: 50px;
+    padding-bottom: 50px;
     background-color: white;
     border-radius: 40px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -113,12 +125,54 @@ export default {
     width: 80%;
     border-radius: 40px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transition: all .8s ease;
+   -webkit-transition: all .8s ease;
+  }
+
+  img:hover{
+    transform: scale(1.03);
+    transition: all .8s ease;
+   -webkit-transition: all .8s ease;
+  }
+
+  .opis{
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .proizvod h3{
+    font-size: 37px;
+    margin-bottom: -5px;
+  }
+  .proizvod h5{
+    margin-top: 10px;
+    font-size: 23px;
+    color: #656565;
+  }
+
+  .proizvod p{
+    font-size: 19px;
+    color: #656565;
+    font-weight: 400;
+  }
+
+  .proizvod h4{
+    font-size: 40px;
+  }
+
+  .wrapper{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .quantityWrapper{
+    width: 60%;
   }
 
   .quantity{
     max-width: 150px;
-    width: 100%;
-    margin-bottom: 15px;
+    width: 60%;
+    margin-bottom: 12px;
   }
 
   .quantity button{
@@ -143,8 +197,64 @@ export default {
     margin: 0;
   }
 
-  .quantity p {
-    margin-bottom: 0;
+  .uKorpi{
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .dodajDugme{
+    display: inline-block;
+    vertical-align: middle;
+    align-items: center;
+    max-width: 150px;
+    width: 80%;
+    text-align: center;
+  }
+
+  .korpaStavke{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #section1 {
+    height: 90%;
+    text-align:center;
+    display:table;
+    width:100%;
+  }
+
+  .h6Div{
+    text-align:center;
+    display:table;
+    margin-left: 10px;
+  }
+
+  h6 {
+    display:table-cell;
+    vertical-align:middle;
+  }
+  .korpaDugme{
+    background-color: #3b5f77;
+    color: white;
+    border-radius: 20px;
+    border: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 18px;
+  }
+
+  .korpaDugme:hover{
+    background-color: #213E51;
+  }
+  .izbaciDugme{
+    background-color: #3b5f77;
+    color: white;
+    border-radius: 20px;
+    border: 0;
+    margin-left: 10px;
   }
 
 </style>

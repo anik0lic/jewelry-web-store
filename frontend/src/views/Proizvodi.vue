@@ -3,7 +3,7 @@
       <b-container class="bv-example-row">
       <b-row>
         <b-col cols="2">
-          <div>
+          <div class="filteri">
             <h4>Kategorije</h4>
             <label><input type="checkbox" v-model="selectedCategory" value="1" /> Prstenje</label>
             <label><input type="checkbox" v-model="selectedCategory" value="2" /> Ogrlice</label>
@@ -17,13 +17,12 @@
           </div>
         </b-col>
         <b-col cols="10">
-          <div>
-            <button @click="prev()">Prethodno</button>
-            ...
-            <button @click="next()">Sledece</button>
-          </div>
           <div class="proizvodi">
             <ProizvodKartica v-for="proizvod in currentPageItems" :key="proizvod.id" :proizvod="proizvod" />
+          </div>
+          <div class="dugmici">
+            <button @click="prev(), scrollToTop()">&lt;</button>
+            <button @click="next(), scrollToTop()">&gt;</button>
           </div>
         </b-col>
       </b-row>
@@ -81,7 +80,7 @@ export default {
       'fetchProizvodi'
     ]),
     next () {
-      if (this.pageNumber * 10 < this.proizvodi.length) {
+      if ((this.pageNumber + 1) * 10 < this.proizvodi.length) {
         this.pageNumber++
       }
     },
@@ -89,6 +88,9 @@ export default {
       if (this.pageNumber > 0) {
         this.pageNumber--
       }
+    },
+    scrollToTop () {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
     }
   },
   mounted () {
@@ -98,10 +100,54 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600;700;800;900&display=swap');
   .proizvodi{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-top: 30px;
+  }
+  .filteri{
+    display: grid;
+    margin-top: 60px;
+    font-family: Kanit, sans-serif;
+    /* text-align: center; */
+  }
+
+  .filteri h4{
+    color: #213E51
+  }
+
+  .filteri label{
+    font-weight: 300;
+    margin-bottom: 3px;
+    color: #404040;
+    accent-color: #3b5f77;
+  }
+
+  .dugmici{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+
+  .dugmici button{
+    margin:10px;
+    background-color: white;
+    color: #213E51;
+    border: 0;
+    border-radius: 10px;
+    font-size: 30px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    width: 50px;
+    font-weight: 700;
+  }
+
+  .dugmici button:hover{
+    background-color: #3b5f77;
+    color: white;
+    transition: all .5s ease;
+   -webkit-transition: all .5s ease;
   }
 
 </style>

@@ -47,7 +47,7 @@ export default {
 
   html, body{
     margin: 0;
-    background-color:#E9E7E8 !important;
+    background-color:#ededed !important;
     color: #656565;
     font-family: 'Nunito', sans-serif;
     font-size: 20px;
@@ -73,7 +73,7 @@ export default {
   }
 
   .korpa span{
-    background-color: #213E51;
+    background-color: #3b5f77;
     position:absolute;
     top:-2px;
     left:0;

@@ -29,7 +29,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600;700;800;900&display=swap');
   .proizvod{
     width: 40%;
-    margin: 2%;
+    margin: 3%;
     padding: 10px;
     border-radius: 40px;
     background-color: #FCFCFC;
@@ -37,15 +37,16 @@ export default {
     text-align: center;
     font-family: 'Kanit', sans-serif;
     color: #213E51;
+    cursor: pointer;
   }
 
   h3{
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 400;
   }
 
   h4{
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 600;
   }
 
@@ -67,5 +68,11 @@ export default {
     margin-bottom: -20px;
     margin-top: -70px;
     margin-left: -20px;
+  }
+
+  img:hover{
+    transform: scale(1.1);
+    transition: all .8s ease;
+   -webkit-transition: all .8s ease;
   }
 </style>
