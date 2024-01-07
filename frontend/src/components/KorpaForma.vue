@@ -22,12 +22,14 @@
         </b-row>
       </b-container>
       <div class="dugme">
-        <b-button class="posalji" @click="posalji()">Pošalji</b-button>
+        <b-button v-if="this.$store.getters.user" class="posalji" @click="posalji()">Pošalji</b-button>
       </div>
     </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   data () {
     return {
@@ -37,7 +39,9 @@ export default {
         telefon: null,
         cena: this.$store.getters.ukupnaCena,
         vreme_narucivanja: new Date(),
-        status: 'Novo'
+        status: 'Novo',
+        user_id: this.$store.getters.user,
+        korpa: this.$store.getters.proizvodiIzKorpe
       }
     }
   },
@@ -61,25 +65,15 @@ export default {
   },
 
   methods: {
+    ...mapActions([
+      'sendNarudzbina'
+    ]),
+
     posalji () {
+      console.log(this.$store.getters.user)
+      console.log(this.$store.getters.ukupnaCena)
       if (this.validnoImeIPrezime && this.validnaAdresa && this.validanBrojTelefona) {
-        fetch('http://localhost:9000/narudzbina', {
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          method: 'POST',
-          body: JSON.stringify(this.narudzbina)
-        })
-          .then(res => res.json())
-          .then(res => {
-            console.log(res)
-            if (res.error) {
-              this.statusnaPoruka = res.error
-              this.statusnaPorukaTip = 'danger'
-            } else {
-              this.statusnaPorukaTip = 'success'
-            }
-          })
+        this.sendNarudzbina(this.narudzbina)
       } else {
         console.log('nije se poslalo')
       }

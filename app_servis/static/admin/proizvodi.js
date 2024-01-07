@@ -1,5 +1,12 @@
 window.addEventListener("load", function(){
-    fetch("http://localhost:9000/proizvod/")
+    const cookies = document.cookie.split('=');
+    const token = cookies[cookies.length - 1];
+
+    fetch("http://localhost:9000/proizvod/",{
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
     .then(response => {
         let promise = response.json();
 
@@ -33,7 +40,7 @@ window.addEventListener("load", function(){
                     var id =  this.closest("tr").dataset.id;
                     fetch(`http://localhost:9000/promeni-cenu/${id}`, {
                         method: 'PUT',
-                            headers: { 'Content-Type': 'application/json' },
+                            headers: { 'Content-Type': 'application/json' , 'Authorization': `Bearer ${token}`},
                             body: JSON.stringify({ cena: c })
                     })
                     .then( response=>response.json() )

@@ -1,5 +1,12 @@
 window.addEventListener("load", function(){
-    fetch("http://localhost:9000/narudzbina/")
+    const cookies = document.cookie.split('=');
+    const token = cookies[cookies.length - 1];
+
+    fetch("http://localhost:9000/narudzbina/",{
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
     .then(response => {
         let promise = response.json();
 
@@ -28,7 +35,12 @@ window.addEventListener("load", function(){
                 tr.appendChild(adresa);
                 
                 for(let j = 0; j < data[i].stavka.length; j++){
-                    fetch("http://localhost:9000/proizvod/" + data[i].stavka[j].proizvod_id).then( resp=>resp.json() )
+                    fetch("http://localhost:9000/proizvod/" + data[i].stavka[j].proizvod_id,{
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    })
+                    .then( resp=>resp.json() )
                     .then( data=>{
                         stavke.innerHTML += data.naziv + " ";
                     })

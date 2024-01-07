@@ -1,20 +1,23 @@
 window.addEventListener("load", function(){
+    const cookies = document.cookie.split('=');
+    const token = cookies[cookies.length - 1];
+
     document.getElementById("forma").addEventListener("submit", function(event){
         event.preventDefault();
         var validno = validacija();	
         if(!validno){ return; }
 
-        var noviMaterijal = {};	
-        noviMaterijal.naziv = document.getElementById("naziv").value;
+        var novaKategorija = {};	
+        novaKategorija.naziv = document.getElementById("naziv").value;
 
-        fetch("http://localhost:9000/materijal/", {
+        fetch("http://localhost:9000/kategorija/", {
             method:"POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(noviMaterijal)
+            headers: { 'Content-Type': 'application/json' , 'Authorization': `Bearer ${token}` },
+            body: JSON.stringify(novaKategorija)
         })
         .then(succ=>succ.json())
         .then(data=>{
-            location.href = "materijali.html";
+            location.href = "kategorije.html";
         })
         .catch(err => console.log(err));	
     });

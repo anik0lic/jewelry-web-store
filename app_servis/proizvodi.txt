@@ -1,6 +1,0 @@
-{"naziv":"Verenički prsten","opis":"Verenički prsten klasičnog dizajna, na kom dominira dijamant.","kategorija":"Prstenje","cena":"600000"}
-{"naziv":"Zlatna ogrlica","opis":"Zlatna ogrlica sa cirkonima","kategorija":"Ogrlice","cena":"168000"}
-{"naziv":"Narukvica sa brilijantima","opis":"Narukvica od zlata optočena brilijantima.","kategorija":"Narukvice","cena":"650000"}
-{"naziv":"Ogrlica belo zlato","opis":"Belo 18K zlato sa dijamantima sa sjajnom i mat završnicom.","kategorija":"Ogrlice","cena":"365000"}
-{"naziv":"prsteeeeeeen","opis":"mnogo lep prsten","kategorija":"Prstenje","cena":"1234"}
-{"naziv":"xcbxcbxc","opis":"sdgdsgsd","kategorija":"Prstenje","cena":"43643634"}

@@ -1,6 +1,7 @@
 const express = require("express");
-const { sequelize, Kategorija, Proizvod} = require("../models");
 const route = express.Router();
+const { sequelize, Kategorija, Proizvod} = require("../models");
+const { authAdminToken } = require("./middleware");
 
 route.use(express.json());
 route.use(express.urlencoded({extended:true}));
@@ -26,7 +27,7 @@ route.get("/", async (req, res) => {
  });
  
  
- route.post("/", async (req, res) => {
+ route.post("/", authAdminToken, async (req, res) => {
     try{
           const novi = await Kategorija.create(req.body);
           if(!res.json(novi)){
@@ -44,7 +45,7 @@ route.get("/", async (req, res) => {
  });
  
  
- route.put("/:id", async (req, res) => {
+ route.put("/:id", authAdminToken, async (req, res) => {
     try{
           const kategorija = await Kategorija.findByPk(req.params.id);
           kategorija.naziv = req.body.naziv;
@@ -57,7 +58,7 @@ route.get("/", async (req, res) => {
  });
  
  
- route.delete("/:id", async (req, res) => {
+ route.delete("/:id", authAdminToken, async (req, res) => {
     try{
           const kategorija = await Kategorija.findByPk(req.params.id);
           kategorija.destroy();

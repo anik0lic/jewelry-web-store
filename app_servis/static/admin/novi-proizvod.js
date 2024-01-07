@@ -1,5 +1,12 @@
 window.addEventListener("load", function(){
-    fetch("http://localhost:9000/kategorija/")
+    const cookies = document.cookie.split('=');
+    const token = cookies[cookies.length - 1];
+
+    fetch("http://localhost:9000/kategorija/",{
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
     .then(response => {
         let promise = response.json();
 
@@ -28,7 +35,7 @@ window.addEventListener("load", function(){
 
         fetch("http://localhost:9000/proizvod/", {
             method:"POST",
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json' , 'Authorization': `Bearer ${token}`},
             body: JSON.stringify(noviProizvod)
         })
         .then(succ=>succ.json())

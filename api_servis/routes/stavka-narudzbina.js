@@ -1,5 +1,6 @@
 const express = require("express");
 const { sequelize, Proizvod, Narudzbina, StavkaNarudzbine} = require("../models");
+const { authAdminToken, authUserToken } = require('./middleware'); 
 const route = express.Router();
 
 route.use(express.json());
@@ -32,7 +33,7 @@ route.get("/", async (req, res) => {
  });
  
  
- route.post("/", async (req, res) => {
+ route.post("/", authUserToken, async (req, res) => {
     try{
           const novi = await StavkaNarudzbine.create(req.body);
           if(!res.json(novi)){
@@ -51,7 +52,7 @@ route.get("/", async (req, res) => {
  });
  
  
- route.put("/:id", async (req, res) => {
+ route.put("/:id", authUserToken, async (req, res) => {
     try{
           const stavkanarudzbina = await StavkaNarudzbine.findByPk(req.params.id);
           stavkanarudzbina.proizvod_id = req.body.proizvod_id;
@@ -65,7 +66,7 @@ route.get("/", async (req, res) => {
  });
  
  
- route.delete("/:id", async (req, res) => {
+ route.delete("/:id", authAdminToken, async (req, res) => {
     try{
           const stavkanarudzbina = await StavkaNarudzbine.findByPk(req.params.id);
           stavkanarudzbina.destroy();

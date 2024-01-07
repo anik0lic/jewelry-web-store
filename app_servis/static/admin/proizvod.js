@@ -1,10 +1,17 @@
 var idProizvoda = null;
 window.addEventListener("load", function(){
+    const cookies = document.cookie.split('=');
+    const token = cookies[cookies.length - 1];
+
     var url = new URL( window.location.href );
     idProizvoda = url.searchParams.get("id");
     console.log(idProizvoda);
 
-    fetch("http://localhost:9000/kategorija/")
+    fetch("http://localhost:9000/kategorija/",{
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
     .then(response => {
         let promise = response.json();
 
@@ -19,7 +26,11 @@ window.addEventListener("load", function(){
     })
     .catch(err=>console.log(err));
 
-    fetch("http://localhost:9000/materijal/")
+    fetch("http://localhost:9000/materijal/",{
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
     .then(response => {
         let promise = response.json();
 
@@ -34,7 +45,12 @@ window.addEventListener("load", function(){
     })
     .catch(err=>console.log(err));
 
-    fetch("http://localhost:9000/proizvod/" + idProizvoda).then( resp=>resp.json() )
+    fetch("http://localhost:9000/proizvod/" + idProizvoda,{
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    .then( resp=>resp.json() )
     .then( data=>{
         console.log(data);
         document.getElementById("naziv").value = data.naziv; 
@@ -66,7 +82,7 @@ window.addEventListener("load", function(){
 
         fetch("http://localhost:9000/proizvod/" + idProizvoda, {
             method:"PUT",
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json' , 'Authorization': `Bearer ${token}`},
             body: JSON.stringify(noviProizvod)
         })
         .then( response=>response.json())
@@ -101,7 +117,7 @@ window.addEventListener("load", function(){
 
         fetch("http://localhost:9000/proizvod-materijal/", {
             method:"POST",
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json' , 'Authorization': `Bearer ${token}`},
             body: JSON.stringify(noviMaterijal)
         })
         .then(succ=>succ.json())
@@ -112,7 +128,12 @@ window.addEventListener("load", function(){
 
     document.getElementById("obrisi").addEventListener("click", function(){
         if( confirm("Potvrdi brisanje") ){
-            fetch("http://localhost:9000/proizvod/" + idProizvoda, { method:"DELETE" })
+            fetch("http://localhost:9000/proizvod/" + idProizvoda, { 
+                method:"DELETE",
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                } 
+            })
             .then( resp=>resp.json()).then(data=>{
                 alert("Obrisan je zapis "+data);
                 location.href = "proizvodi.html";
@@ -155,6 +176,9 @@ function dodajMaterijal(id, idProizvodMaterijal){
 
         fetch("http://localhost:9000/proizvod-materijal/" + idProizvodMaterijal, {
             method:"DELETE",
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         })
         .then(succ=>succ.json())
         .catch(err => console.log(err));

@@ -1,5 +1,12 @@
 window.addEventListener("load", function(){
-    fetch("http://localhost:9000/materijal/")
+    const cookies = document.cookie.split('=');
+    const token = cookies[cookies.length - 1];
+
+    fetch("http://localhost:9000/kategorija/",{
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
     .then(response => {
         let promise = response.json();
 
@@ -19,7 +26,7 @@ window.addEventListener("load", function(){
                 let btnIzmeni = document.createElement("a");
                 btnIzmeni.className = "btn btn-secondary";
                 btnIzmeni.innerHTML = "Izmeni";
-                btnIzmeni.href = "materijal.html?id=" + data[i].id;
+                btnIzmeni.href = "kategorija.html?id=" + data[i].id;
                 
                 akcija.appendChild(btnIzmeni);
                 tr.appendChild(akcija);

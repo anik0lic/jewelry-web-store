@@ -1,6 +1,7 @@
 const express = require("express");
-const { sequelize, Narudzbina, StavkaNarudzbine} = require("../models");
 const route = express.Router();
+const { sequelize, Narudzbina, StavkaNarudzbine} = require("../models");
+const { authAdminToken, authUserToken } = require('./middleware'); 
 
 route.use(express.json());
 route.use(express.urlencoded({extended:true}));
@@ -30,9 +31,10 @@ route.get("/", async (req, res) => {
  });
  
  
- route.post("/", async (req, res) => {
+ route.post("/", authUserToken, async (req, res) => {
     try{
           const novi = await Narudzbina.create(req.body);
+
           if(!res.json(novi)){
                const novi = {};
                novi.vreme_narucivanja = req.body.vreme;
@@ -45,6 +47,16 @@ route.get("/", async (req, res) => {
                return res.json(insertovani);
           }
 
+          console.log(req.body.korpa)
+
+          for(let i = 0; i < req.body.korpa.length; i++){
+               const stavka = await StavkaNarudzbine.create({
+                   narudzbina_id: novi.id,
+                   proizvod_id: req.body.korpa[i].id,
+                   komada: req.body.korpa[i].quantity,
+               });
+          }
+
           return;
     }catch(err){
          console.log(err);
@@ -53,7 +65,7 @@ route.get("/", async (req, res) => {
  });
  
  
- route.put("/:id", async (req, res) => {
+ route.put("/:id", authUserToken, async (req, res) => {
     try{
           const narudzbina = await Narudzbina.findByPk(req.params.id);
           narudzbina.vreme_narucivanja = req.body.vreme_narucivanja;
@@ -71,7 +83,7 @@ route.get("/", async (req, res) => {
  });
  
  
- route.delete("/:id", async (req, res) => {
+ route.delete("/:id", authAdminToken, async (req, res) => {
     try{
           const narudzbina = await Narudzbina.findByPk(req.params.id);
           narudzbina.destroy();
@@ -80,6 +92,20 @@ route.get("/", async (req, res) => {
          console.log(err);
          res.status(500).json({ error: "Greska", data: err });
     }
+ });
+
+route.put("/status/:id", authAdminToken, async (req, res) => {
+
+     try {
+         const narudzbina = await Narudzbina.findByPk(req.params.id);
+         narudzbina.status = req.body.status;
+         await narudzbina.save();
+         return res.json(narudzbina);
+ 
+     } catch (err) {
+         console.log(err);
+         res.status(500).json({ error: "Greska", data: err });
+     }
  });
  
  

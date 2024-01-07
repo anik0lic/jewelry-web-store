@@ -10,6 +10,7 @@
                 <ul class="navbar mb-lg-0">
                     <li class="nav-item"><router-link to="/"  class="nav-link">Pocetna</router-link></li>
                     <li class="nav-item"><router-link to="/proizvodi"  class="nav-link">Katalog</router-link></li>
+                    <li class="nav-item"><a v-if="token" href="#" @click="logout">Odjava</a></li>
                 </ul>
                 </div>
                 <div class="col-2 flex">
@@ -20,7 +21,8 @@
                             </span>
                         </router-link>
                     </div>
-                <a href="#"><img class="user" src="@/assets/user.png" alt="user"></a>
+                <router-link v-if="!token" to="/login"><img class="user" src="@/assets/user.png" alt="user"></router-link>
+                <router-link v-if="token" to="/korisnik"><img class="user" src="@/assets/user.png" alt="user"></router-link>
                 </div>
             </div>
         </div>
@@ -29,10 +31,32 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
+
 export default {
   computed: {
     brojProizvodaUKorpi () {
       return this.$store.getters.ukupnoProizvoda
+    },
+    ...mapState([
+      'token',
+      'user_id'
+    ])
+  },
+  methods: {
+    ...mapMutations([
+      'removeToken',
+      'setToken',
+      'removeUser'
+    ]),
+    logout () {
+      this.removeToken()
+      this.removeUser()
+    }
+  },
+  mounted () {
+    if (localStorage.token) {
+      this.setToken(localStorage.token)
     }
   }
 }

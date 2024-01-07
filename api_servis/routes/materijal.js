@@ -1,6 +1,7 @@
 const express = require("express");
-const { sequelize, Materijal, ProizvodMaterijal} = require("../models");
 const route = express.Router();
+const { sequelize, Materijal, ProizvodMaterijal} = require("../models");
+const { authAdminToken } = require('./middleware'); 
 
 route.use(express.json());
 route.use(express.urlencoded({extended:true}));
@@ -30,7 +31,7 @@ route.get("/", async (req, res) => {
  });
  
  
- route.post("/", async (req, res) => {
+ route.post("/", authAdminToken, async (req, res) => {
     try{
           const novi = await Materijal.create(req.body);
           if(!res.json(novi)){
@@ -48,7 +49,7 @@ route.get("/", async (req, res) => {
  });
  
  
- route.put("/:id", async (req, res) => {
+ route.put("/:id", authAdminToken, async (req, res) => {
     try{
           const materijal = await Materijal.findByPk(req.params.id);
           materijal.naziv = req.body.naziv;
@@ -61,7 +62,7 @@ route.get("/", async (req, res) => {
  });
  
  
- route.delete("/:id", async (req, res) => {
+ route.delete("/:id", authAdminToken, async (req, res) => {
     try{
           const materijal = await Materijal.findByPk(req.params.id);
           materijal.destroy();

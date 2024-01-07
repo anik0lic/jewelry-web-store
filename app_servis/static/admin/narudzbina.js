@@ -1,10 +1,18 @@
 var idNarudzbine = null;
 window.addEventListener("load", function(){
+    const cookies = document.cookie.split('=');
+    const token = cookies[cookies.length - 1];
+
     var url = new URL( window.location.href );
     idNarudzbine = url.searchParams.get("id");
     console.log(idNarudzbine);
 
-    fetch("http://localhost:9000/narudzbina/" + idNarudzbine).then( resp=>resp.json() )
+    fetch("http://localhost:9000/narudzbina/" + idNarudzbine,{
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    .then( resp=>resp.json() )
     .then( data=>{
         console.log(data);
         document.getElementById("vreme").innerHTML = data.vreme_narucivanja; 
@@ -17,7 +25,12 @@ window.addEventListener("load", function(){
         let ul = document.getElementById("sadrzaj");
         for(let i = 0; i < data.stavka.length; i++){
             let li = document.createElement("li");
-            fetch("http://localhost:9000/proizvod/" + data.stavka[i].proizvod_id).then( resp=>resp.json() )
+            fetch("http://localhost:9000/proizvod/" + data.stavka[i].proizvod_id,{
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then( resp=>resp.json() )
             .then( data=>{
                 li.innerHTML += data.naziv + " ";
             })
