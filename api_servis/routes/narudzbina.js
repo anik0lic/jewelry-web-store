@@ -35,20 +35,6 @@ route.get("/", async (req, res) => {
     try{
           const novi = await Narudzbina.create(req.body);
 
-          if(!res.json(novi)){
-               const novi = {};
-               novi.vreme_narucivanja = req.body.vreme;
-               novi.status = req.body.mojStatus;
-               novi.adresa = req.body.mojaAdresa;
-               novi.telefon = req.body.mojTelefon;
-               novi.ime_prezime = req.body.imeIPrezime;
-               novi.cena = req.body.mojaCena;
-               const insertovani = await Narudzbina.create(novi);
-               return res.json(insertovani);
-          }
-
-          console.log(req.body.korpa)
-
           for(let i = 0; i < req.body.korpa.length; i++){
                const stavka = await StavkaNarudzbine.create({
                    narudzbina_id: novi.id,
@@ -99,7 +85,7 @@ route.put("/status/:id", authAdminToken, async (req, res) => {
      try {
          const narudzbina = await Narudzbina.findByPk(req.params.id);
          narudzbina.status = req.body.status;
-         await narudzbina.save();
+         narudzbina.save();
          return res.json(narudzbina);
  
      } catch (err) {

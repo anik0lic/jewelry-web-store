@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="proizvodi-page">
       <b-container class="bv-example-row">
       <b-row>
         <b-col cols="2">
@@ -101,6 +101,7 @@ export default {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
   .proizvodi{
     display: flex;
     flex-wrap: wrap;
@@ -111,11 +112,13 @@ export default {
     display: grid;
     margin-top: 60px;
     font-family: Kanit, sans-serif;
-    /* text-align: center; */
+    padding: 20px;
   }
 
   .filteri h4{
-    color: #213E51
+    color: #213E51;
+    letter-spacing: 1px;
+    font-size: 27px;
   }
 
   .filteri label{
@@ -123,6 +126,8 @@ export default {
     margin-bottom: 3px;
     color: #404040;
     accent-color: #3b5f77;
+    font-size: 18px;
+    letter-spacing: 1px;
   }
 
   .dugmici{

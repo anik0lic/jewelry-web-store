@@ -43,3 +43,26 @@ window.addEventListener("load", function(){
     })
     .catch(err=>console.log(err));
 });
+
+function changeStatus(){
+    const cookies = document.cookie.split('=');
+    const token = cookies[cookies.length - 1];
+
+    let status = document.getElementById("status").value;
+    fetch("http://localhost:9000/narudzbina/status/" + idNarudzbine,{
+        method: "PUT",
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            status: status,
+        })
+    })
+    .then( resp=>resp.json() )
+    .then( data=>{
+        console.log(data);
+        alert("Status je promenjen!");
+    })
+    .catch(err=>console.log(err));
+}

@@ -47,6 +47,9 @@ app.use("/stavka-narudzbina", stavkaNarudzbinaRoutes);
 const proizvodMaterijalRoutes = require("./routes/proizvod-materijal.js");
 app.use("/proizvod-materijal", proizvodMaterijalRoutes);
 
+const usersRoutes = require("./routes/user.js");
+app.use("/user", usersRoutes);
+
 app.put("/promeni-cenu/:id", async (req,res)=>{
 	try{
    	   	const proizvod = await Proizvod.findByPk(req.params.id);

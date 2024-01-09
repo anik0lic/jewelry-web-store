@@ -8,7 +8,8 @@ export default new Vuex.Store({
     proizvodi: [],
     korpa: [],
     token: '',
-    user_id: null
+    user_id: null,
+    user: null
   },
   getters: {
     kolicinaProizvoda: state => proizvod => {
@@ -27,6 +28,9 @@ export default new Vuex.Store({
       return state.korpa.reduce((a, b) => a + b.quantity, 0)
     },
     user: state => {
+      return state.user
+    },
+    user_id: state => {
       return state.user_id
     }
   },
@@ -80,7 +84,15 @@ export default new Vuex.Store({
       state.user_id = id
     },
     removeUser (state) {
+      state.user = null
       state.user_id = null
+    },
+    addUser (state, user) {
+      state.user = user
+    },
+    removeSveIzKorpe (state) {
+      state.korpa = []
+      localStorage.removeItem('korpa')
     }
   },
   actions: {
@@ -140,8 +152,14 @@ export default new Vuex.Store({
       })
 
       const json = await response.json()
-      commit('setToken', json.token)
-      commit('setUser', json.id)
+      if (json.token) {
+        commit('setToken', json.token)
+        commit('setUser', json.id)
+      } else {
+        alert('Register failed')
+      }
+      // commit('setToken', json.token)
+      // commit('setUser', json.id)
     },
     async login ({ commit }, obj) {
       const response = await fetch('http://127.0.0.1:9001/login', {
@@ -157,6 +175,26 @@ export default new Vuex.Store({
       } else {
         alert('Login failed')
       }
+    },
+    async getUser ({ commit, state }, userID) {
+      return new Promise((resolve, reject) => {
+        if (state.user !== null) {
+          resolve(state.user)
+        } else {
+          fetch(`http://localhost:9000/user/${userID}`, {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${localStorage.token}`,
+              'Content-Type': 'application/json'
+            }
+          })
+            .then(res => res.json())
+            .then(data => {
+              commit('addUser', data)
+              resolve(data)
+            })
+        }
+      })
     }
   },
   modules: {

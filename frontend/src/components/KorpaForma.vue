@@ -22,7 +22,7 @@
         </b-row>
       </b-container>
       <div class="dugme">
-        <b-button v-if="this.$store.getters.user" class="posalji" @click="posalji()">Pošalji</b-button>
+        <b-button class="posalji" @click="posalji()">Pošalji</b-button>
       </div>
     </div>
 </template>
@@ -40,7 +40,7 @@ export default {
         cena: this.$store.getters.ukupnaCena,
         vreme_narucivanja: new Date(),
         status: 'Novo',
-        user_id: this.$store.getters.user,
+        user_id: this.$store.getters.user_id,
         korpa: this.$store.getters.proizvodiIzKorpe
       }
     }
@@ -72,10 +72,23 @@ export default {
     posalji () {
       console.log(this.$store.getters.user)
       console.log(this.$store.getters.ukupnaCena)
+      if (!this.$store.getters.user_id) {
+        this.$router.push('/login')
+        return
+      }
+      if (this.$store.getters.proizvodiIzKorpe.length === 0) {
+        alert('Korpa je prazna')
+        return
+      }
       if (this.validnoImeIPrezime && this.validnaAdresa && this.validanBrojTelefona) {
         this.sendNarudzbina(this.narudzbina)
+        alert('Vasa narudzbina je poslata')
+        this.$store.commit('removeSveIzKorpe')
+        this.narudzbina.ime_prezime = null
+        this.narudzbina.adresa = null
+        this.narudzbina.telefon = null
       } else {
-        console.log('nije se poslalo')
+        alert('nije se poslalo')
       }
     }
   }
@@ -105,6 +118,7 @@ export default {
     height: 55%;
     font-size: 18px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 10px;
 }
 
 .forma input:focus{
@@ -121,6 +135,11 @@ export default {
 
 .dugme .posalji{
     background-color: #3b5f77;
+    border-radius: 20px;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 .dugme .posalji:hover{

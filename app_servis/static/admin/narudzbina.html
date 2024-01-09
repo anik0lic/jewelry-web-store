@@ -30,10 +30,6 @@
                             <li class="nav-item"><a class="nav-link" href="narudzbine.html">Narudbžine</a></li>
                         </ul>
                     </div>
-                    <div class="col-2 flex">
-                        <a href="#"><img class="bag" src="images/bag.png" alt="bag"></a>
-                        <a href="#"><img class="user" src="images/user.png" alt="user"></a>
-                    </div>
                 </div>
             </div>
         </nav>
@@ -61,15 +57,11 @@
               
                 <dt class="col-sm-2">Sadržaj narudžbine:</dt>
                 <dd class="col-sm-10">
-                    <ul id="sadrzaj">
-                        <!-- <li>Verenički prsten 1x</li>
-                        <li>Zlatna ogrlica 1x</li>
-                        <li>Narukvica sa brilijantima x1</li> -->
-                    </ul>
+                    <ul id="sadrzaj"></ul>
                 </dd>
                 <dt class="col-sm-2">Status</dt>
                 <dd class="col-sm-4">
-                    <select class="form-select" name="status" id="status" onchange="document.getElementById('forma').submit()">
+                    <select class="form-select" name="status" id="status" onchange=changeStatus()>
                         <option value="Novo">Novo</option>
                         <option value="Prihvaceno">Prihvaceno</option>
                         <option value="Odbijeno">Odbijeno</option>

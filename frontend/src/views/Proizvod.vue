@@ -78,6 +78,10 @@ export default {
       }
     },
     dodajUKorpu () {
+      if (!this.$store.getters.user_id) {
+        this.$router.push('/login')
+        return
+      }
       this.addUKorpu({ proizvod: this.proizvod, kolicina: this.quantity })
     },
     izbaciIzKorpe () {
@@ -239,8 +243,8 @@ export default {
     color: white;
     border-radius: 20px;
     border: 0;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: 18px;
