@@ -33,11 +33,10 @@ app.post('/register', (req, res) => {
         const token = jwt.sign(usr, process.env.ACCESS_TOKEN_SECRET);
         console.log(token);
         res.json({ token: token , id: rows.id});
-    }).catch( err => res.status(500).json(err) );
+    }).catch( err => res.status(500).json({ msg: "Error"}) );
 });
 
 app.post('/login', (req, res) => {
-    console.log("uso u login");
     User.findOne({ where: { username: req.body.username } })
       .then( usr => {
         if (bcrypt.compareSync(req.body.password, usr.password)) {
@@ -47,13 +46,12 @@ app.post('/login', (req, res) => {
                 role: usr.admin
             };
             const token = jwt.sign(obj, process.env.ACCESS_TOKEN_SECRET);
-            console.log("token u login" + token);
-            res.json({ token: token , id: usr.id});
+            res.json({ token: token , id: usr.id, role: usr.admin});
         } else {
             res.status(400).json({ msg: "Invalid credentials"});
         }
       })
-      .catch( err => res.status(500).json(err) );
+      .catch( err => res.status(500).json({ msg: "Invalid credentials"}) );
 });
 
 app.listen({ port: 9001 }, async () => {

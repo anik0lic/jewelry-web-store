@@ -17,12 +17,11 @@ window.addEventListener('load', () => {
             .then( res => res.json() )
             .then( data => {
                 if (data.msg) {
-                    //prikazi gresku
                     alert(data.msg);
+                } else if (data.role === false) {
+                    alert("You are not admin");
                 } else {
-                    //zapisi token u cookie
                     document.cookie = `token=${data.token};SameSite=Lax`;
-                    //redirektuj na index.html stranicu
                     window.location.href = 'index.html';
                 }
             });

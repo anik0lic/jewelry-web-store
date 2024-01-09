@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div class="header">
         <nav class="navbar navbar-expand-lg">
         <div class="nav-wrapper container-fluid text-center">
             <div class="row w-100">

@@ -8,7 +8,6 @@
       </div>
       <img src="@/assets/pocetna.jpg" alt="">
     </div>
-    <!-- <h1>ZLATARA</h1> -->
   </div>
 </template>
 
