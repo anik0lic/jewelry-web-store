@@ -1,1 +1,1 @@
-# skript jezici projekat
+# jewelry-web-store
