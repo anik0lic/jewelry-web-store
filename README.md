@@ -25,3 +25,7 @@ Run all services with:
 ```
 node app
 ```
+Run frontend with:
+```
+npm run serve
+```
